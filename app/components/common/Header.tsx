@@ -21,7 +21,7 @@ export default function Header() {
               href="/prodotti-vincenti"
               className="px-4 py-2 border border-gray-200 rounded-md flex items-center gap-2 text-gray-600 hover:bg-gray-50/80"
             >
-              <Crosshair className="h-4 w-4" />
+              <Crosshair className="h-6 w-6" />
               <span className="hidden md:inline">Prodotti Vincenti</span>
             </Link>
             <button className="px-4 py-2 bg-[#FF6B00] text-white rounded-md flex items-center gap-2 
@@ -29,7 +29,7 @@ export default function Header() {
               md:scale-100
               origin-right"
             >
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="h-6 w-6" />
               <span className="hidden md:inline">Connetti a eBay</span>
               <span className="inline md:hidden">Connetti</span>
             </button>
