@@ -1,8 +1,11 @@
+"use client"
+
 import { LucideIcon } from "lucide-react"
 import Link from "next/link"
 import { ButtonHTMLAttributes, ReactNode } from "react"
+import { motion, HTMLMotionProps } from "framer-motion"
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, keyof ButtonHTMLAttributes<HTMLButtonElement>> {
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'outline'
   icon?: LucideIcon
@@ -24,12 +27,12 @@ export default function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const baseStyles = `
-    inline-flex items-center gap-2 font-medium
-    transition-colors rounded-lg
-    disabled:opacity-50 disabled:cursor-not-allowed
-    group
-  `
+  const baseStyles = [
+    'inline-flex items-center gap-2 font-medium',
+    'transition-colors rounded-lg',
+    'disabled:opacity-50 disabled:cursor-not-allowed',
+    'group'
+  ].join(' ')
 
   const variants = {
     primary: 'bg-[#FF6B00] text-white hover:bg-[#FF6B00]/90',
@@ -49,45 +52,87 @@ export default function Button({
     lg: 'px-8 py-4 text-lg'
   }
 
-  const styles = `
-    ${baseStyles}
-    ${variants[variant]}
-    ${sizes[size]}
-    ${fullWidth ? 'w-full justify-center' : ''}
-    ${className}
-  `
+  const styles = [
+    baseStyles,
+    variants[variant],
+    sizes[size],
+    fullWidth ? 'w-full justify-center' : '',
+    className
+  ].filter(Boolean).join(' ')
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.02,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut"
+      }
+    },
+    tap: {
+      scale: 0.90,
+      transition: {
+        duration: 0.1
+      }
+    }
+  }
+
+  const iconVariants = {
+    hover: {
+      rotate: iconPosition === 'right' ? 45 : -45,
+      x: iconPosition === 'right' ? 3 : -3,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut"
+      }
+    }
+  }
 
   const content = (
     <>
       {Icon && iconPosition === 'left' && (
-        <Icon className={`
-          ${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}
-          ${iconStyles[variant]}
-        `} 
-      />
+        <motion.div variants={iconVariants}>
+          <Icon className={`
+            ${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}
+            ${iconStyles[variant]}
+          `} />
+        </motion.div>
       )}
-      {children}
+      <span>{children}</span>
       {Icon && iconPosition === 'right' && (
-        <Icon className={`
-          ${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}
-          ${iconStyles[variant]}
-        `} 
-      />
+        <motion.div variants={iconVariants}>
+          <Icon className={`
+            ${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}
+            ${iconStyles[variant]}
+          `} />
+        </motion.div>
       )}
     </>
   )
 
   if (href) {
     return (
-      <Link href={href} className={styles}>
-        {content}
-      </Link>
+      <motion.div
+        whileHover="hover"
+        whileTap="tap"
+        variants={buttonVariants}
+      >
+        <Link href={href} className={styles}>
+          {content}
+        </Link>
+      </motion.div>
     )
   }
 
   return (
-    <button className={styles} {...props}>
+    <motion.button 
+      className={styles} 
+      {...props}
+      whileHover="hover"
+      whileTap="tap"
+      variants={buttonVariants}
+      drag={undefined}
+    >
       {content}
-    </button>
+    </motion.button>
   )
 }
