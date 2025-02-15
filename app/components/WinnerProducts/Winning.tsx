@@ -14,7 +14,7 @@ type Category = {
 type Product = {
   id: string
   title: string
-  price: number
+  price: string
   imageUrl: string
   soldQuantity: string
   ebayUrl: string
@@ -27,7 +27,7 @@ export default function Winning() {
     {
       id: "1",
       title: "Costume Carnevale",
-      price: 49.90,
+      price: "49.90",
       imageUrl: "/images/costume.jpg",
       soldQuantity: "70+",
       ebayUrl: "https://ebay.com/..."

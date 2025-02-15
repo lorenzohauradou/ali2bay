@@ -2,7 +2,7 @@
 
 import { Box, Crosshair, Sparkles } from "lucide-react"
 import Link from "next/link"
-
+import Button from "../ui/Button"
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-gray-200">
@@ -17,23 +17,19 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-4">
-            <Link 
+            <Button 
+              variant="outline" 
+              icon={Crosshair}
               href="/prodotti-vincenti"
-              className="px-4 py-2 border border-gray-200 rounded-md flex items-center gap-2 text-gray-600 
-                hover:bg-gray-50/80 group"
             >
-              <Crosshair className="h-6 w-6 transition-colors group-hover:text-[#0066CC]" />
               <span className="hidden md:inline">Prodotti Vincenti</span>
-            </Link>
-            <button className="px-4 py-2 bg-[#FF6B00] text-white rounded-md flex items-center gap-2 
-              hover:bg-[#FF6B00]/90 transition-colors
-              md:scale-100
-              origin-right"
+            </Button>
+            <Button 
+              icon={Sparkles}
             >
-              <Sparkles className="h-6 w-6" />
               <span className="hidden md:inline">Connetti a eBay</span>
               <span className="inline md:hidden">Connetti</span>
-            </button>
+            </Button>
           </div>
         </div>
       </div>

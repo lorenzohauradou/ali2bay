@@ -30,9 +30,6 @@ export default function ProcessingStatus() {
         <motion.p variants={itemVariants}>
           • Selected price rounding: .99
         </motion.p>
-        <motion.p variants={itemVariants}>
-          • Source marketplace: amazon
-        </motion.p>
       </motion.div>
     </motion.div>
   )

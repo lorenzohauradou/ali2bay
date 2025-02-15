@@ -1,5 +1,5 @@
 import { Rocket, Banknote, Trophy, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import Button from "@/app/components/ui/Button"
 
 export default function Features() {
     const features = [
@@ -19,14 +19,15 @@ export default function Features() {
         description: "Scopri cosa funziona su eBay e inizia a venderlo subito.",
         action: (
           <div className="flex justify-center mt-4">
-            <Link 
+            <Button 
+              variant="secondary"
+              size="sm"
               href="/prodotti-vincenti"
-              className="inline-flex gap-2 px-4 py-2 bg-[#0066CC] text-white 
-                rounded-lg text-sm hover:bg-[#0066CC]/90 transition-colors"
+              icon={ArrowRight}
+              iconPosition="right"
             >
               Scopri
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            </Button>
           </div>
         )
       }
