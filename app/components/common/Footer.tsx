@@ -19,7 +19,7 @@ export default function Footer() {
               <h1 className="text-2xl font-bold text-[#0066CC]">Ali2Bay</h1>
             </Link>
             <p className="text-gray-600 text-sm md:text-base max-w-md mx-auto md:mx-0">
-              La piattaforma <span className="font-semibold text-gray-600">più veloce</span> per fare <span className="font-semibold text-gray-600">dropshipping</span> da <span className="font-semibold text-gray-600">Amazon</span> e <span className="font-semibold text-gray-600">AliExpress</span> su <span className="font-semibold text-gray-600">eBay</span>.
+              La piattaforma <span className="font-semibold text-gray-600">più veloce</span> per fare <span className="font-semibold text-gray-600">dropshipping</span> da <span className="font-semibold text-gray-600">Amazon</span> e <span className="font-semibold text-gray-600">AliExpress</span> a <span className="font-semibold text-gray-600">eBay</span>.
             </p>
           </div>
 
