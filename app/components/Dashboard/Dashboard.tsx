@@ -35,7 +35,7 @@ export default function Dashboard() {
             Il modo più veloce per fare dropshipping su eBay
           </h2>
           <p className="text-xl text-gray-600">
-            Risparmia tempo e vendi di più. Pubblica prodotti da Amazon e AliExpress su eBay in un solo click:
+            <span className="font-semibold text-gray-600">Risparmia tempo</span> e <span className="font-semibold text-gray-600">vendi</span> di più. Pubblica prodotti da <span className="font-semibold text-gray-600">Amazon</span> e <span className="font-semibold text-gray-600">AliExpress</span> su <span className="font-semibold text-gray-600">eBay</span> in un solo click:
             <span className="font-semibold text-[#FF6B00] ml-2">
               facile, veloce e automatico!
             </span>

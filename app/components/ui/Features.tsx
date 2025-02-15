@@ -6,17 +6,17 @@ export default function Features() {
       {
         icon: <Rocket className="h-8 w-8 text-[#0066CC]" />,
         title: "Vendi senza sforzi",
-        description: "Basta collegarti a eBay e incollare i link. Il sistema fa tutto il resto per te."
+        description: "Basta <span class='font-semibold text-gray-600'>collegarti</span> a <span class='font-semibold text-gray-600'>eBay</span> e incollare i link. Il sistema fa tutto il resto per te."
       },
       {
         icon: <Banknote className="h-8 w-8 text-[#0066CC]" />,
         title: "Più profitti, meno lavoro",
-        description: "Ottimizza immagini, prezzi e descrizioni in automatico utilizzando l'intelligenza artificiale per massimizzare i guadagni."
+        description: "Ottimizza <span class='font-semibold text-gray-600'>immagini</span>, <span class='font-semibold text-gray-600'>prezzi</span> e <span class='font-semibold text-gray-600'>descrizioni</span> in automatico utilizzando <span class='font-semibold text-gray-600'>l'intelligenza artificiale</span> per massimizzare i guadagni."
       },
       {
         icon: <Trophy className="h-8 w-8 text-[#0066CC]" />,
         title: "Trova i prodotti migliori",
-        description: "Scopri cosa funziona su eBay e inizia a venderlo subito.",
+        description: "Scopri cosa <span class='font-semibold text-gray-600'>funziona</span> su <span class='font-semibold text-gray-600'>eBay</span> e inizia a <span class='font-semibold text-gray-600'>venderlo</span> subito.",
         action: (
           <div className="flex justify-center mt-4">
             <Button 
@@ -48,9 +48,10 @@ export default function Features() {
                     <h3 className="text-xl font-semibold text-gray-800">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-600">
-                      {feature.description}
-                    </p>
+                    <p 
+                      className="text-gray-600"
+                      dangerouslySetInnerHTML={{ __html: feature.description }}
+                    />
                     {feature.action && feature.action}
                   </div>
                 </div>
