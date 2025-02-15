@@ -27,7 +27,7 @@ export default function Winning() {
     {
       id: "1",
       title: "Costume Carnevale",
-      price: "49.90",
+      price: "29.90",
       imageUrl: "/images/Costume.jpg",
       soldQuantity: "70+",
       ebayUrl: "https://ebay.com/..."
@@ -71,7 +71,7 @@ export default function Winning() {
             Prodotti Vincenti
           </h2>
           <p className="text-xl text-gray-600">
-            Diventa un <span className="font-semibold text-gray-600">cecchino</span> del <span className="font-semibold text-gray-600">dropshipping,</span> trova e vendi solo i <span className="font-semibold text-gray-600">prodotti più venduti</span> e conquista eBay <span className="font-semibold text-gray-600">prima della concorrenza!</span>
+            Diventa un <span className="font-semibold text-gray-600">cecchino</span> del <span className="font-semibold text-gray-600">dropshipping,</span> trova e vendi solo i <span className="font-semibold text-gray-600">prodotti più acquistati</span> e conquista eBay <span className="font-semibold text-gray-600">prima della concorrenza!</span>
           </p>
         </div>
 
