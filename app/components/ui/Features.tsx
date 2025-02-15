@@ -6,7 +6,7 @@ export default function Features() {
       {
         icon: <Rocket className="h-8 w-8 text-[#0066CC]" />,
         title: "Vendi senza sforzi",
-        description: "Basta collegarti all'account eBay e incollare i link. Il sistema fa tutto il resto per te."
+        description: "Basta collegarti a eBay e incollare i link. Il sistema fa tutto il resto per te."
       },
       {
         icon: <Banknote className="h-8 w-8 text-[#0066CC]" />,

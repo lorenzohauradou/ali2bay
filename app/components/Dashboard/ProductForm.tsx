@@ -156,7 +156,7 @@ export default function ProductForm() {
             <label className="text-lg text-gray-600 font-semibold">
               Arrotonda Prezzo
             </label>
-            <div className="flex gap-8">
+            <div className="flex gap-8 font-semibold">
               {[".99", ".90"].map((value) => (
                 <label key={value} className="group flex items-center gap-3 cursor-pointer">
                   <input

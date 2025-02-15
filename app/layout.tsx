@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import "./globals.css"
 import Header from "@/app/components/common/Header"
-
+import Footer from "@/app/components/common/Footer"
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-geist",
@@ -37,6 +37,7 @@ export default function RootLayout({
         <div className="relative">
           {children}
         </div>
+        <Footer />
       </body>
     </html>
   )

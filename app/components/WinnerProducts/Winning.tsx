@@ -56,6 +56,13 @@ export default function Winning() {
     })
   }
 
+  const handleSearch = () => {
+    if (selectedCategory && selectedSubcategory) {
+      // Logica per la ricerca dei prodotti
+      console.log('Ricerca prodotti...')
+    }
+  }
+
   return (
     <main className="container mx-auto px-4 py-12">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -109,6 +116,22 @@ export default function Winning() {
                   ))}
               </select>
             </div>
+          </div>
+          
+          <div className="flex justify-center mt-8">
+            <button
+              disabled={!selectedCategory || !selectedSubcategory}
+              onClick={() => handleSearch()}
+              className={`
+                px-6 py-3 rounded-lg font-medium transition-all duration-200
+                ${(!selectedCategory || !selectedSubcategory) 
+                  ? 'bg-gray-400/80 text-white cursor-not-allowed'
+                  : 'bg-[#0066CC] text-white hover:bg-[#0066CC]/90 active:scale-[0.98]'
+                }
+              `}
+            >
+              Cerca Prodotti
+            </button>
           </div>
         </div>
 

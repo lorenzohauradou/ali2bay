@@ -19,9 +19,10 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <Link 
               href="/prodotti-vincenti"
-              className="px-4 py-2 border border-gray-200 rounded-md flex items-center gap-2 text-gray-600 hover:bg-gray-50/80"
+              className="px-4 py-2 border border-gray-200 rounded-md flex items-center gap-2 text-gray-600 
+                hover:bg-gray-50/80 group"
             >
-              <Crosshair className="h-6 w-6" />
+              <Crosshair className="h-6 w-6 transition-colors group-hover:text-[#0066CC]" />
               <span className="hidden md:inline">Prodotti Vincenti</span>
             </Link>
             <button className="px-4 py-2 bg-[#FF6B00] text-white rounded-md flex items-center gap-2 
