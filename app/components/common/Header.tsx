@@ -4,7 +4,7 @@ import { Box, Crosshair, Sparkles, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import Button from "../ui/Button"
 import { motion } from "framer-motion"
-import { API_URL, fetchApi } from "@/config/api"
+import { fetchApi } from "@/config/api"
 import { useState, useEffect } from "react"
 
 export default function Header() {
@@ -23,6 +23,19 @@ export default function Header() {
     checkEbayStatus()
   }, [])
 
+  const handleEbayConnect = async () => {
+    try {
+      const response = await fetchApi('/collega-ebay');
+      if (response.auth_url) {
+        // Salva lo state in localStorage per verificarlo al callback
+        localStorage.setItem('ebay_oauth_state', response.state);
+        window.location.href = response.auth_url;
+      }
+    } catch (error) {
+      console.error('Errore durante la connessione a eBay:', error);
+    }
+  };
+
   const logoVariants = {
     tap: {
       scale: 0.80,
@@ -33,10 +46,6 @@ export default function Header() {
         damping: 10
       }
     }
-  }
-
-  const handleEbayConnect = () => {
-    window.location.href = `${API_URL}/collega-ebay`
   }
 
   return (
@@ -61,12 +70,22 @@ export default function Header() {
             >
               <span className="hidden md:inline">Prodotti Vincenti</span>
             </Button>
-            <Button 
-              icon={isEbayConnected ? CheckCircle : Sparkles}
-              onClick={handleEbayConnect}
-            >
-              {isEbayConnected ? 'Connesso a eBay' : 'Connetti a eBay'}
-            </Button>
+            {!isEbayConnected ? (
+              <button
+                onClick={handleEbayConnect}
+                className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+              >
+                <span className="flex items-center">
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Connetti a eBay
+                </span>
+              </button>
+            ) : (
+              <div className="text-green-600 font-medium flex items-center">
+                <CheckCircle className="w-5 h-5 mr-2" />
+                Connesso a eBay
+              </div>
+            )}
           </div>
         </div>
       </div>

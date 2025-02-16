@@ -6,6 +6,14 @@ const nextConfig = {
       {
         source: '/collega-ebay',
         destination: `${apiUrl}/collega-ebay`
+      },
+      {
+        source: '/ebay-callback',
+        destination: `${apiUrl}/ebay-callback`
+      },
+      {
+        source: '/scrape',
+        destination: `${apiUrl}/scrape`
       }
     ]
   },

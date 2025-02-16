@@ -7,6 +7,18 @@ import PriceManipulator from "@/app/components/Dashboard/PriceManipulator"
 import ProTip from "../ui/ProTip"
 import { fetchApi } from "@/config/api"
 
+type FormSubmitEvent = React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>;
+
+type ApiError = {
+  error: string;
+}
+
+type ApiResponse = {
+  success: boolean;
+  errors?: ApiError[];
+  error?: string;
+}
+
 export default function ProductForm() {
   const [urls, setUrls] = useState("")
   const [priceRounding, setPriceRounding] = useState(".99")
@@ -30,7 +42,7 @@ export default function ProductForm() {
     checkEbayStatus()
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormSubmitEvent) => {
     e.preventDefault()
     setError('')
     setSuccess(false)
@@ -47,7 +59,7 @@ export default function ProductForm() {
 
     setLoading(true)
     try {
-      const response = await fetchApi('/scrape', {
+      const response: ApiResponse = await fetchApi('/scrape', {
         method: 'POST',
         body: JSON.stringify({ 
           urls: urls.split('\n').map(url => url.trim()).filter(Boolean),
@@ -61,19 +73,44 @@ export default function ProductForm() {
       if (response.success) {
         setSuccess(true)
         setUrls('')
+        if (response.errors && response.errors.length > 0) {
+          setError(`Alcuni prodotti non sono stati pubblicati: ${response.errors.map((err: ApiError) => err.error).join(', ')}`)
+        }
       } else {
         setError(response.error || 'Errore durante la pubblicazione')
       }
-    } catch (err) {
-      console.error('Errore:', err)
-      setError('Errore di connessione')
+    } catch (error) {
+      console.error('Errore:', error)
+      if (error instanceof Error) {
+        setError(error.message)
+      } else {
+        setError('Errore di connessione')
+      }
     } finally {
       setLoading(false)
     }
   }
 
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    e.preventDefault()
+    
+    const pastedText = e.clipboardData.getData('text')
+    const cursorPosition = e.currentTarget.selectionStart || 0
+    const textBeforeCursor = urls.substring(0, cursorPosition)
+    const textAfterCursor = urls.substring(cursorPosition)
+    
+    const newValue = textBeforeCursor + pastedText + '\n\n' + textAfterCursor
+    setUrls(newValue)
+
+    setTimeout(() => {
+      if (textareaRef.current) {
+        textareaRef.current.scrollTop = textareaRef.current.scrollHeight
+      }
+    }, 0)
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }} className="space-y-6">
       {error && (
         <div className="bg-red-50 p-4 rounded-lg text-red-600 mb-4">
           {error}
@@ -93,23 +130,7 @@ export default function ProductForm() {
             ref={textareaRef}
             value={urls}
             onChange={(e) => setUrls(e.target.value)}
-            onPaste={(e) => {
-              e.preventDefault()
-              
-              const pastedText = e.clipboardData.getData('text')
-              const cursorPosition = e.currentTarget.selectionStart
-              const textBeforeCursor = urls.substring(0, cursorPosition)
-              const textAfterCursor = urls.substring(cursorPosition)
-              
-              const newValue = textBeforeCursor + pastedText + '\n\n' + textAfterCursor
-              setUrls(newValue)
-
-              setTimeout(() => {
-                if (textareaRef.current) {
-                  textareaRef.current.scrollTop = textareaRef.current.scrollHeight
-                }
-              }, 0)
-            }}
+            onPaste={handlePaste}
             placeholder="Incolla gli URL delle pagine dei prodotti da pubblicare su eBay..."
             className="w-full min-h-[200px] p-4 border border-gray-200 rounded-lg 
               text-gray-600 placeholder:text-gray-400
@@ -137,7 +158,7 @@ export default function ProductForm() {
       <div className="flex justify-center">
         <Button 
           icon={Rocket}
-          onClick={handleSubmit}
+          onClick={(e) => { e.preventDefault(); handleSubmit(e); }}
         >
           {loading ? 'Pubblicazione in corso...' : 'Pubblica su eBay'}
         </Button>
