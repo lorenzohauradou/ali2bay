@@ -3,14 +3,40 @@ import { Geist } from "next/font/google"
 import "./globals.css"
 import Header from "@/app/components/common/Header"
 import Footer from "@/app/components/common/Footer"
+
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-geist",
 })
 
 export const metadata: Metadata = {
-  title: "Ali2Bay - Amazon & AliExpress to eBay Lister",
-  description: "List products from Amazon or AliExpress to eBay automatically",
+  title: "Ali2Bay - Automatizza il Dropshipping da Amazon e AliExpress su eBay",
+  description: "Vuoi fare dropshipping su eBay senza perdere tempo? Ali2Bay pubblica automaticamente prodotti da Amazon e AliExpress in pochi secondi. Provalo gratis!",
+  openGraph: {
+    title: "Ali2Bay - Dropshipping su eBay in 1 Clic",
+    description: "Ali2Bay è il tool definitivo per il dropshipping su eBay. Pubblica prodotti da Amazon e AliExpress automaticamente e inizia a guadagnare!",
+    url: "https://www.ali2bay.com",
+    type: "website",
+    images: [
+      {
+        url: "https://www.ali2bay.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ali2Bay - Il miglior tool per dropshipping su eBay"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ali2Bay - Automatizza il Dropshipping da Amazon e AliExpress su eBay",
+    description: "Ali2Bay pubblica automaticamente prodotti da Amazon e AliExpress su eBay. Provalo gratis e inizia a vendere oggi stesso!",
+    images: [
+      {
+        url: "https://www.ali2bay.com/twitter-image.jpg",
+        alt: "Ali2Bay - Dropshipping veloce e automatico"
+      }
+    ]
+  }
 }
 
 export default function RootLayout({
@@ -19,7 +45,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="it" className={geist.variable}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Ali2Bay Team" />
+        <meta name="keywords" content="dropshipping eBay, dropshipping Amazon eBay, dropshipping AliExpress eBay, tool dropshipping eBay, pubblica prodotti su eBay" />
+      </head>
       <body className="min-h-screen bg-[#FAFBFF] overflow-x-hidden">
         <div className="fixed inset-0 -z-10">
           {/* Pattern sottile */}
