@@ -1,11 +1,28 @@
 "use client"
 
-import { Box, Crosshair, Sparkles } from "lucide-react"
+import { Box, Crosshair, Sparkles, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import Button from "../ui/Button"
 import { motion } from "framer-motion"
+import { API_URL, fetchApi } from "@/config/api"
+import { useState, useEffect } from "react"
 
 export default function Header() {
+  const [isEbayConnected, setIsEbayConnected] = useState(false)
+
+  useEffect(() => {
+    // Verifica stato connessione all'avvio
+    const checkEbayStatus = async () => {
+      try {
+        const response = await fetchApi('/check-ebay-status')
+        setIsEbayConnected(response.connected)
+      } catch (error) {
+        console.error('Errore verifica stato eBay:', error)
+      }
+    }
+    checkEbayStatus()
+  }, [])
+
   const logoVariants = {
     tap: {
       scale: 0.80,
@@ -16,6 +33,10 @@ export default function Header() {
         damping: 10
       }
     }
+  }
+
+  const handleEbayConnect = () => {
+    window.location.href = `${API_URL}/collega-ebay`
   }
 
   return (
@@ -41,10 +62,10 @@ export default function Header() {
               <span className="hidden md:inline">Prodotti Vincenti</span>
             </Button>
             <Button 
-              icon={Sparkles}
+              icon={isEbayConnected ? CheckCircle : Sparkles}
+              onClick={handleEbayConnect}
             >
-              <span className="hidden md:inline">Connetti a eBay</span>
-              <span className="inline md:hidden">Connetti</span>
+              {isEbayConnected ? 'Connesso a eBay' : 'Connetti a eBay'}
             </Button>
           </div>
         </div>

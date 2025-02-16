@@ -2,10 +2,10 @@
 
 import { LucideIcon } from "lucide-react"
 import Link from "next/link"
-import { ButtonHTMLAttributes, ReactNode } from "react"
-import { motion, HTMLMotionProps } from "framer-motion"
+import { ReactNode } from "react"
+import { motion } from "framer-motion"
 
-interface ButtonProps extends Omit<HTMLMotionProps<"button">, keyof ButtonHTMLAttributes<HTMLButtonElement>> {
+interface ButtonProps {
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'outline'
   icon?: LucideIcon
@@ -14,6 +14,8 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, keyof ButtonHTMLAt
   size?: 'sm' | 'md' | 'lg'
   fullWidth?: boolean
   className?: string
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  disabled?: boolean
 }
 
 export default function Button({
@@ -25,7 +27,8 @@ export default function Button({
   size = 'md',
   fullWidth = false,
   className = '',
-  ...props
+  onClick,
+  disabled
 }: ButtonProps) {
   const baseStyles = [
     'inline-flex items-center gap-2 font-medium',
@@ -125,12 +128,12 @@ export default function Button({
 
   return (
     <motion.button 
-      className={styles} 
-      {...props}
+      className={styles}
       whileHover="hover"
       whileTap="tap"
       variants={buttonVariants}
-      drag={undefined}
+      onClick={onClick}
+      disabled={disabled}
     >
       {content}
     </motion.button>
