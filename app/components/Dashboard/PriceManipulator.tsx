@@ -139,6 +139,7 @@ export default function PriceManipulator({
             <input
               type="number"
               min="1"
+              max="999"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               className="w-20 px-2 py-1.5

@@ -165,7 +165,7 @@ export default function ProductForm() {
         />
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center md:scale-110">
         <Button 
           icon={Rocket}
           onClick={handleSubmit}

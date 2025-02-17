@@ -83,15 +83,13 @@ export default function Header() {
               <span className="hidden md:inline">Prodotti Vincenti</span>
             </Button>
             {!isEbayConnected ? (
-              <button
+              <Button 
                 onClick={handleEbayConnect}
-                className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+                icon={Sparkles}
+                variant="primary"
               >
-                <span className="flex items-center">
-                  <Sparkles className="w-5 h-5 mr-2" />
-                  Connetti a eBay
-                </span>
-              </button>
+                Connetti a eBay
+              </Button>
             ) : (
               <div className="text-[#0066CC] font-medium flex items-center">
                 <CheckCircle className="w-5 h-5 mr-2" />
