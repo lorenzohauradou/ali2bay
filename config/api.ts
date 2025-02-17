@@ -1,30 +1,32 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL || (
   process.env.NODE_ENV === 'development' 
-    ? 'http://localhost:5000'  
+    ? 'http://localhost:5001'  
     : 'https://api.ali2bay.com' 
 );
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
     try {
+        console.log('Calling API:', endpoint);
+        
         const response = await fetch(endpoint, {
             ...options,
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 ...options.headers,
-            },
-            credentials: 'include'
+            }
         });
 
         if (!response.ok) {
-            const errorData = await response.json().catch(() => null);
-            console.error('Errore API:', response.status, errorData);
-            throw new Error(errorData?.error || `Errore API: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        return response.json();
+        const data = await response.json();
+        console.log('API Response:', data);
+        return data;
     } catch (error) {
-        console.error('Errore nella chiamata API:', error);
+        console.error('API Error:', error);
         throw error;
     }
 };

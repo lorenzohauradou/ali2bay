@@ -11,28 +11,40 @@ export default function Header() {
   const [isEbayConnected, setIsEbayConnected] = useState(false)
 
   useEffect(() => {
-    // Verifica stato connessione all'avvio
     const checkEbayStatus = async () => {
       try {
-        const response = await fetchApi('/check-ebay-status')
-        setIsEbayConnected(response.connected)
+        console.log('Checking eBay status...');
+        const response = await fetchApi('/check-ebay-status');
+        console.log('eBay status response:', response);
+        setIsEbayConnected(response.connected);
       } catch (error) {
-        console.error('Errore verifica stato eBay:', error)
+        console.error('eBay status check failed:', error);
+        setIsEbayConnected(false);
       }
-    }
-    checkEbayStatus()
-  }, [])
+    };
+    checkEbayStatus();
+  }, []);
 
   const handleEbayConnect = async () => {
     try {
+      console.log('Starting eBay connection...'); // Debug log
+      
       const response = await fetchApi('/collega-ebay');
-      if (response.auth_url) {
-        // Salva lo state in localStorage per verificarlo al callback
+      console.log('Response from /collega-ebay:', response); // Debug log
+      
+      if (response && response.auth_url && response.state) {
+        // Salva lo state
         localStorage.setItem('ebay_oauth_state', response.state);
+        
+        // Fai il redirect
         window.location.href = response.auth_url;
+      } else {
+        console.error('Invalid response:', response);
+        alert('Errore durante la connessione a eBay. Riprova più tardi.');
       }
     } catch (error) {
-      console.error('Errore durante la connessione a eBay:', error);
+      console.error('Connection error:', error);
+      alert('Errore durante la connessione a eBay. Riprova più tardi.');
     }
   };
 
