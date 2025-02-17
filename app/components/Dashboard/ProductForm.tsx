@@ -22,7 +22,7 @@ export default function ProductForm() {
   const [isEbayConnected, setIsEbayConnected] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
-
+  const [quantity, setQuantity] = useState("1")
   useEffect(() => {
     const checkEbayStatus = async () => {
       try {
@@ -160,6 +160,8 @@ export default function ProductForm() {
           setPriceRounding={setPriceRounding}
           multiplier={multiplier}
           setMultiplier={setMultiplier}
+          quantity={quantity}
+          setQuantity={setQuantity}
         />
       </div>
 
