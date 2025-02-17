@@ -9,12 +9,17 @@ import { useState, useEffect } from "react"
 
 export default function Header() {
   const [isEbayConnected, setIsEbayConnected] = useState(false)
+  
+  // Determina l'URL base in base all'ambiente
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? 'https://ali2bay.com'
+    : 'http://localhost:5001';
 
   useEffect(() => {
     const checkEbayStatus = async () => {
       try {
         console.log('Checking eBay status...');
-        const response = await fetchApi('/check-ebay-status');
+        const response = await fetchApi(`${baseUrl}/check-ebay-status`);
         console.log('eBay status response:', response);
         setIsEbayConnected(response.connected);
       } catch (error) {
@@ -23,14 +28,14 @@ export default function Header() {
       }
     };
     checkEbayStatus();
-  }, []);
+  }, [baseUrl]);
 
   const handleEbayConnect = async () => {
     try {
-      console.log('Starting eBay connection...'); // Debug log
+      console.log('Starting eBay connection...'); 
       
-      const response = await fetchApi('/collega-ebay');
-      console.log('Response from /collega-ebay:', response); // Debug log
+      const response = await fetchApi(`${baseUrl}/collega-ebay`);
+      console.log('Response from /collega-ebay:', response);
       
       if (response && response.auth_url && response.state) {
         // Salva lo state
