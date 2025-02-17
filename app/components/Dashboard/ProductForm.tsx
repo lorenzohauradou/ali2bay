@@ -170,6 +170,7 @@ export default function ProductForm() {
           icon={Rocket}
           onClick={handleSubmit}
           disabled={loading}
+          className="bg-gradient-to-r from-[#FF6B00] to-[#FF8A3D] hover:from-[#FF8A3D] hover:to-[#FF6B00] transition-all duration-300"
         >
           {loading ? 'Pubblicazione in corso...' : 'Pubblica su eBay'}
         </Button>
