@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'
+    const apiUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://api.ali2bay.com'
+      : 'http://localhost:5001'
+    
+    console.log('Using API URL:', apiUrl) // Debug log
     
     return [
       {
