@@ -11,9 +11,11 @@ export default function Header() {
   const [isEbayConnected, setIsEbayConnected] = useState(false)
   
   // Determina l'URL base in base all'ambiente
-  const baseUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://ali2bay.com'
-    : 'http://localhost:5001';
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || (
+    process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:5001'
+      : 'https://www.ali2bay.com'  // Usa www
+  );
 
   useEffect(() => {
     const checkEbayStatus = async () => {
