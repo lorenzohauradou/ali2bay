@@ -5,28 +5,35 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL || (
 );
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
-    try {
-        console.log('Calling API:', endpoint);
-        
-        const response = await fetch(endpoint, {
-            ...options,
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                ...options.headers,
-            }
-        });
+  const defaultOptions: RequestInit = {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      ...options.headers,
+    },
+  }
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+  try {
+    const response = await fetch(endpoint, {
+      ...defaultOptions,
+      ...options,
+      headers: {
+        ...defaultOptions.headers,
+        ...options.headers,
+      },
+    })
 
-        const data = await response.json();
-        console.log('API Response:', data);
-        return data;
-    } catch (error) {
-        console.error('API Error:', error);
-        throw error;
+    console.log(`API ${endpoint} status:`, response.status)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
-};
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('API Error:', error)
+    throw error
+  }
+}

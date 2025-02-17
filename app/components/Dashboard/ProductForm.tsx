@@ -7,15 +7,9 @@ import PriceManipulator from "@/app/components/Dashboard/PriceManipulator"
 import ProTip from "../ui/ProTip"
 import { fetchApi } from "@/config/api"
 
-type FormSubmitEvent = React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>;
-
-type ApiError = {
-  error: string;
-}
-
 type ApiResponse = {
   success: boolean;
-  errors?: ApiError[];
+  errors?: Array<{ error: string }>;
   error?: string;
 }
 
@@ -30,19 +24,33 @@ export default function ProductForm() {
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
-    // Verifica stato connessione
     const checkEbayStatus = async () => {
       try {
-        const response = await fetchApi('/check-ebay-status')
-        setIsEbayConnected(response.connected)
+        const response = await fetchApi('/check-ebay-status', {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Accept': 'application/json',
+          }
+        })
+        
+        console.log('eBay status response:', response)
+        
+        if (response && typeof response.connected === 'boolean') {
+          setIsEbayConnected(response.connected)
+        } else {
+          console.error('Risposta non valida:', response)
+          setIsEbayConnected(false)
+        }
       } catch (error) {
         console.error('Errore verifica stato eBay:', error)
+        setIsEbayConnected(false)
       }
     }
     checkEbayStatus()
   }, [])
 
-  const handleSubmit = async (e: FormSubmitEvent) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setError('')
     setSuccess(false)
@@ -74,7 +82,7 @@ export default function ProductForm() {
         setSuccess(true)
         setUrls('')
         if (response.errors && response.errors.length > 0) {
-          setError(`Alcuni prodotti non sono stati pubblicati: ${response.errors.map((err: ApiError) => err.error).join(', ')}`)
+          setError(`Alcuni prodotti non sono stati pubblicati: ${response.errors.map(err => err.error).join(', ')}`)
         }
       } else {
         setError(response.error || 'Errore durante la pubblicazione')
@@ -110,7 +118,7 @@ export default function ProductForm() {
   }
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }} className="space-y-6">
+    <form onSubmit={(e) => { e.preventDefault(); }} className="space-y-6">
       {error && (
         <div className="bg-red-50 p-4 rounded-lg text-red-600 mb-4">
           {error}
@@ -158,7 +166,8 @@ export default function ProductForm() {
       <div className="flex justify-center">
         <Button 
           icon={Rocket}
-          onClick={(e) => { e.preventDefault(); handleSubmit(e); }}
+          onClick={handleSubmit}
+          disabled={loading}
         >
           {loading ? 'Pubblicazione in corso...' : 'Pubblica su eBay'}
         </Button>

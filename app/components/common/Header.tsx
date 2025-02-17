@@ -93,7 +93,7 @@ export default function Header() {
                 </span>
               </button>
             ) : (
-              <div className="text-green-600 font-medium flex items-center">
+              <div className="text-[#0066CC] font-medium flex items-center">
                 <CheckCircle className="w-5 h-5 mr-2" />
                 Connesso a eBay
               </div>
