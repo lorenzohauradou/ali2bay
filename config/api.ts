@@ -5,35 +5,53 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL || (
 );
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://www.ali2bay.com';
+  const fullUrl = endpoint.startsWith('http') ? endpoint : `${baseUrl}${endpoint}`;
+
   const defaultOptions: RequestInit = {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      ...options.headers,
+      'Accept': 'application/json'
     },
-  }
+  };
 
   try {
-    const response = await fetch(endpoint, {
+    console.log('Chiamata API a:', fullUrl, 'con opzioni:', { ...defaultOptions, ...options });
+    
+    const response = await fetch(fullUrl, {
       ...defaultOptions,
       ...options,
-      headers: {
-        ...defaultOptions.headers,
-        ...options.headers,
-      },
-    })
+    });
 
-    console.log(`API ${endpoint} status:`, response.status)
+    // Log dettagliato della risposta
+    console.log('Risposta ricevuta:', {
+      ok: response.ok,
+      status: response.status,
+      statusText: response.statusText,
+      url: response.url,
+      headers: Object.fromEntries(response.headers.entries())
+    });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      const errorText = await response.text();
+      console.error('Dettagli errore:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText
+      });
+      throw new Error(`Errore HTTP ${response.status}: ${errorText || response.statusText}`);
     }
 
-    const data = await response.json()
-    return data
+    const data = await response.json().catch(() => null);
+    if (!data) {
+      console.error('Risposta vuota o non valida');
+      throw new Error('Risposta non valida dal server');
+    }
+
+    return data;
   } catch (error) {
-    console.error('API Error:', error)
-    throw error
+    console.error('Errore durante la chiamata API:', error);
+    throw error;
   }
-}
+};
