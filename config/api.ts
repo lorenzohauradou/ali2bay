@@ -5,7 +5,7 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL || (
 );
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://www.ali2bay.com';
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || API_URL;
   const fullUrl = endpoint.startsWith('http') ? endpoint : `${baseUrl}${endpoint}`;
 
   const defaultOptions: RequestInit = {
