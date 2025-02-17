@@ -12,7 +12,7 @@ export default function Header() {
   
   // Determina l'URL base in base all'ambiente
   const baseUrl = process.env.NODE_ENV === 'production' 
-    ? window.location.origin
+    ? 'https://ali2bay.com'
     : 'http://localhost:5001';
 
   useEffect(() => {
