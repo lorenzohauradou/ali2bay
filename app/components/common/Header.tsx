@@ -32,22 +32,18 @@ export default function Header() {
 
   const handleEbayConnect = async () => {
     try {
-      console.log('Base URL:', baseUrl); 
-      const response = await fetchApi(`${baseUrl}/collega-ebay`);
-      console.log('Response from /collega-ebay:', response);
+      console.log('Tentativo di connessione a eBay');
+      console.log('Base URL:', baseUrl);
+      console.log('Endpoint completo:', `${baseUrl}/collega-ebay`);
       
-      if (response && response.auth_url && response.state) {
-        // Salva lo state
-        localStorage.setItem('ebay_oauth_state', response.state);
-        // Fai il redirect
+      const response = await fetchApi(`${baseUrl}/collega-ebay`);
+      console.log('Risposta:', response);
+      
+      if (response.auth_url) {
         location.href = response.auth_url;
-      } else {
-        console.error('Invalid response:', response);
-        alert('Errore durante la connessione a eBay. Riprova più tardi.');
       }
     } catch (error) {
-      console.error('Connection error:', error);
-      alert('Errore durante la connessione a eBay. Riprova più tardi.');
+      console.error('Errore dettagliato:', error);
     }
   };
 
