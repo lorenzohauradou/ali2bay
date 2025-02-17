@@ -1,7 +1,7 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL || (
   process.env.NODE_ENV === 'development' 
     ? 'http://localhost:5001'  
-    : 'https://ali2bay.com' 
+    : 'http://174.138.8.60'
 );
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
