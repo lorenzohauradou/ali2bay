@@ -4,15 +4,15 @@ const nextConfig = {
     return [
       {
         source: '/collega-ebay',
-        destination: 'https://www.ali2bay.com/collega-ebay',
+        destination: 'https://api.ali2bay.com/collega-ebay',
       },
       {
         source: '/check-ebay-status',
-        destination: 'https://www.ali2bay.com/check-ebay-status',
+        destination: 'https://api.ali2bay.com/check-ebay-status',
       },
       {
         source: '/ebay-callback',
-        destination: 'https://www.ali2bay.com/ebay-callback',
+        destination: 'https://api.ali2bay.com/ebay-callback',
       },
     ]
   },
