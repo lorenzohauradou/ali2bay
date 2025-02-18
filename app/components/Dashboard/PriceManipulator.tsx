@@ -80,50 +80,11 @@ export default function PriceManipulator({
         </div>
       </div>
 
-      {/* Arrotonda Prezzo + Quantità in un unico blocco */}
       <div className="space-y-4 md:space-y-4 text-center md:text-left mb-6 mt-6 md:mt-0 md:mb-0 order-last md:order-first">
-        {/* Arrotonda Prezzo */}
-        <div className="mb-6">
-          <label className="text-lg text-gray-600 font-semibold block">
-            Arrotonda Prezzo
-          </label>
-          <div className="flex justify-center md:justify-start gap-8 font-semibold">
-            {[".99", ".90"].map((value) => (
-              <label key={value} className="group flex items-center gap-3 cursor-pointer">
-                <input
-                  type="radio"
-                  value={value}
-                  checked={priceRounding === value}
-                  onChange={(e) => setPriceRounding(e.target.value)}
-                  className="w-4 h-4 
-                    appearance-none
-                    rounded-full 
-                    border-2 border-gray-300
-                    checked:border-[#FF6B00]
-                    checked:bg-[#FF6B00]
-                    hover:border-[#FF6B00]/60
-                    checked:hover:bg-[#FF6B00]/90
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-[#FF6B00]/20
-                    transition-colors
-                    cursor-pointer"
-                />
-                <span className="text-gray-500 text-lg tracking-tight transition-colors
-                  group-hover:text-gray-600 
-                  peer-checked:text-gray-800">
-                  {value}
-                  <span className="ml-0.5 text-sm font-medium">€</span>
-                </span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Quantità Disponibile */}
+        {/* Quantità */}
         <div>
           <label className="text-lg text-gray-600 font-semibold block mb-2">
-            Quantità Disponibile
+            Quantità
           </label>
           <div className="flex justify-center items-center gap-7">
             <div className="flex items-center text-gray-500">
@@ -153,6 +114,44 @@ export default function PriceManipulator({
                 transition-colors"
               placeholder="1"
             />
+          </div>
+        </div>
+
+        {/* Arrotonda Prezzo */}
+        <div className="mt-6">
+          <label className="text-lg text-gray-600 font-semibold block">
+            Arrotonda Prezzo
+          </label>
+          <div className="flex mt-4 justify-center md:justify-start gap-8 font-semibold">
+            {[".99", ".90"].map((value) => (
+              <label key={value} className="group flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  value={value}
+                  checked={priceRounding === value}
+                  onChange={(e) => setPriceRounding(e.target.value)}
+                  className="w-4 h-4 
+                    appearance-none
+                    rounded-full 
+                    border-2 border-gray-300
+                    checked:border-[#FF6B00]
+                    checked:bg-[#FF6B00]
+                    hover:border-[#FF6B00]/60
+                    checked:hover:bg-[#FF6B00]/90
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-[#FF6B00]/20
+                    transition-colors
+                    cursor-pointer"
+                />
+                <span className="text-gray-500 text-lg tracking-tight transition-colors
+                  group-hover:text-gray-600 
+                  peer-checked:text-gray-800">
+                  {value}
+                  <span className="ml-0.5 text-sm font-medium">€</span>
+                </span>
+              </label>
+            ))}
           </div>
         </div>
       </div>

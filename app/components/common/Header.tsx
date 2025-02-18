@@ -14,7 +14,7 @@ export default function Header() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || (
     process.env.NODE_ENV === 'development' 
       ? 'http://localhost:5001'
-      : 'https://www.ali2bay.com'  // Usa www
+      : 'https://api.ali2bay.com'  // Usa il sottodominio api invece di www
   );
 
   useEffect(() => {
@@ -36,7 +36,8 @@ export default function Header() {
     try {
       console.log('Tentativo di connessione a eBay');
       
-      const response = await fetch('http://localhost:5001/collega-ebay', {
+      // Usa baseUrl invece dell'URL hardcodato
+      const response = await fetch(`${baseUrl}/collega-ebay`, {
         method: 'GET',
         credentials: 'include',
         headers: {
