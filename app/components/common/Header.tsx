@@ -14,10 +14,18 @@ export default function Header() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || (
     process.env.NODE_ENV === 'development' 
       ? 'http://localhost:5001'
-      : 'https://api.ali2bay.com'  // Usa il sottodominio api invece di www
+      : 'https://api.ali2bay.com'
   );
 
   useEffect(() => {
+    // Controlla i parametri URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('ebay_connected') === 'true') {
+      setIsEbayConnected(true);
+      // Rimuovi i parametri dall'URL
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+    
     const checkEbayStatus = async () => {
       try {
         console.log('Checking eBay status...');
