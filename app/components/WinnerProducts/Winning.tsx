@@ -71,7 +71,7 @@ export default function Winning() {
             Prodotti Vincenti
           </h2>
           <p className="text-xl text-gray-600">
-            Diventa un <span className="font-semibold text-gray-600">cecchino</span> del <span className="font-semibold text-gray-600">dropshipping,</span> trova e vendi solo i <span className="font-semibold text-gray-600">prodotti più acquistati</span> e conquista eBay <span className="font-semibold text-gray-600">prima della concorrenza!</span>
+            Diventa un <span className="font-semibold text-gray-600">Cecchino</span> del <span className="font-semibold text-gray-600">Dropshipping:</span> trova e vendi solo i <span className="font-semibold text-gray-600">prodotti più acquistati</span> e conquista eBay <span className="font-semibold text-gray-600">prima della concorrenza!</span>
           </p>
         </div>
 

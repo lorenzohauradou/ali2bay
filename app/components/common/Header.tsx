@@ -143,12 +143,14 @@ export default function Header() {
                 icon={Sparkles}
                 variant="primary"
               >
-                Connetti a eBay
+                <span className="md:hidden">Connetti</span>
+                <span className="hidden md:inline">Connetti a eBay</span>
               </Button>
             ) : (
               <div className="text-[#0066CC] font-medium flex items-center">
                 <CheckCircle className="w-5 h-5 mr-2" />
-                Connesso a eBay
+                <span className="md:hidden">Connesso</span>
+                <span className="hidden md:inline">Connesso a eBay</span>
               </div>
             )}
           </div>
