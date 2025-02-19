@@ -12,9 +12,7 @@ const nextConfig = {
       },
       {
         source: '/ebay-callback',
-        destination: process.env.NODE_ENV === 'development'
-          ? 'http://localhost:5001/ebay-callback'
-          : 'https://api.ali2bay.com/ebay-callback',
+        destination: 'https://api.ali2bay.com/ebay-callback',
       },
     ]
   },

@@ -42,27 +42,27 @@ export default function Header() {
 
   const handleEbayConnect = async () => {
     try {
-        console.log("Iniziando connessione eBay...");
-        const response = await fetch(`${baseUrl}/collega-ebay`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+      console.log("Iniziando connessione eBay...");
+      const response = await fetch(`${baseUrl}/collega-ebay`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json'
         }
-
-        const data = await response.json();
-        console.log("Risposta ricevuta dal server:", data);
-        console.log("Auth URL:", data.auth_url);
-        console.log("Reindirizzamento a eBay...");
-        
-        window.location.href = data.auth_url;
+      });
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      const data = await response.json();
+      console.log("URL di autorizzazione:", data.auth_url);
+      
+      // Reindirizza il browser all'URL di autorizzazione eBay
+      window.location.href = data.auth_url;
+      
     } catch (error) {
-        console.error('Errore durante la connessione:', error);
+      console.error('Errore durante la connessione:', error);
     }
   };
 
@@ -92,10 +92,14 @@ export default function Header() {
                 'Accept': 'application/json',
             }
         })
-        .then(response => {
-            console.log("Risposta callback ricevuta:", response.status);
-            if (!response.ok) throw new Error('Callback failed');
-            window.location.reload();
+        .then(response => response.json())
+        .then(data => {
+            console.log("Risposta callback:", data);
+            if (data.status === 'success') {
+                window.location.href = '/';  // Redirect alla home dopo il successo
+            } else {
+                console.error('Errore:', data.message);
+            }
         })
         .catch(error => {
             console.error('Errore durante il callback:', error);
