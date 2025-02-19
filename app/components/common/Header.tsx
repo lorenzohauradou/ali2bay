@@ -42,36 +42,66 @@ export default function Header() {
 
   const handleEbayConnect = async () => {
     try {
-      console.log('Tentativo di connessione a eBay');
-      
-      // Usa baseUrl invece dell'URL hardcodato
-      const response = await fetch(`${baseUrl}/collega-ebay`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+        console.log("Iniziando connessione eBay...");
+        const response = await fetch(`${baseUrl}/collega-ebay`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-      });
 
-      console.log('Status:', response.status);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Errore:', errorText);
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Risposta:', data);
-      
-      if (data.auth_url) {
+        const data = await response.json();
+        console.log("Risposta ricevuta dal server:", data);
+        console.log("Auth URL:", data.auth_url);
+        console.log("Reindirizzamento a eBay...");
+        
         window.location.href = data.auth_url;
-      }
     } catch (error) {
-      console.error('Errore durante la connessione a eBay:', error);
+        console.error('Errore durante la connessione:', error);
     }
   };
+
+  useEffect(() => {
+    console.log("useEffect eseguito");
+    console.log("URL corrente:", window.location.href);
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    const code = urlParams.get('code');
+    const state = urlParams.get('state');
+    
+    console.log("Parametri URL:", { error, code, state });
+    
+    if (error) {
+        console.error('Errore eBay:', error);
+        return;
+    }
+    
+    if (code && state) {
+        console.log("Codice e state ricevuti, chiamata callback...");
+        
+        fetch(`${baseUrl}/ebay-callback?code=${code}&state=${state}`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+            }
+        })
+        .then(response => {
+            console.log("Risposta callback ricevuta:", response.status);
+            if (!response.ok) throw new Error('Callback failed');
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('Errore durante il callback:', error);
+        });
+    }
+  }, [baseUrl]);
 
   const logoVariants = {
     tap: {
