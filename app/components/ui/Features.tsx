@@ -36,8 +36,14 @@ export default function Features() {
     return (
       <section className="py-8">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 space-y-4">
-          </div>
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-4xl font-bold text-[#0066CC]">
+            Fai dropshipping su eBay in un solo click
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <span className="font-bold text-gray-600">Dimentica</span> le <span className="font-bold text-gray-600">ore spese</span> a <span className="font-bold text-gray-600">scrivere descrizioni</span> e <span className="font-bold text-gray-600">ottimizzare immagini:</span> con <span className="font-bold text-gray-600">Ali2Bay</span> tutto è <span className="font-bold text-gray-600">automatico</span> così puoi dedicarti a far crescere il tuo <span className="font-bold text-gray-600">business</span> senza stress.
+          </p>
+        </div>
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               {features.map((feature, index) => (

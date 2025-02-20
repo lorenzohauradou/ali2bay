@@ -8,15 +8,8 @@ export default function FromTo() {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl font-bold text-[#0066CC]">
-            Fai dropshipping su eBay in un solo click
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          <span className="font-bold text-gray-600">Dimentica</span> le <span className="font-bold text-gray-600">ore spese</span> a <span className="font-bold text-gray-600">scrivere descrizioni</span> e <span className="font-bold text-gray-600">ottimizzare immagini:</span> con <span className="font-bold text-gray-600">Ali2Bay</span> tutto è <span className="font-bold text-gray-600">automatico</span> così puoi dedicarti a far crescere il tuo <span className="font-bold text-gray-600">business</span> senza stress.
-          </p>
-        </div>
 
+        
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto relative">
           {/* SVG per le linee di collegamento */}
           <svg className="absolute top-0 right-12 w-full h-full -z-10" viewBox="0 0 1200 500">
