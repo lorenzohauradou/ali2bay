@@ -151,7 +151,7 @@ export default function FromTo() {
           >
             <div className="relative">
               <Box className="h-16 w-16 md:h-24 md:w-24 text-[#0066CC]" />
-              <div className="absolute -top-1 -right-1 h-3 w-3 md:h-4 md:w-4 bg-[#FF6B00] rounded-full" />
+              <div className="absolute -top-1 -right-1 h-3 w-3 md:h-6 md:w-6 bg-[#FF6B00] rounded-full" />
             </div>
           </motion.div>
 
