@@ -7,11 +7,48 @@ import PriceManipulator from "@/app/components/Dashboard/PriceManipulator"
 import ProTip from "../ui/ProTip"
 import { fetchApi } from "@/config/api"
 import { motion, AnimatePresence } from 'framer-motion'
+import ReactConfetti from 'react-confetti'
 
 type ApiResponse = {
   success: boolean;
   errors?: Array<{ error: string }>;
   error?: string;
+}
+
+const ParticleEffect = () => {
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute left-1/2 top-1/2"
+          initial={{ 
+            x: 0,
+            y: 0,
+            scale: 0,
+            opacity: 1
+          }}
+          animate={{
+            x: Math.sin(i) * (Math.random() * 200 + 100),
+            y: Math.cos(i) * (Math.random() * 200 + 100),
+            scale: [0, 1.5, 0],
+            opacity: [1, 1, 0]
+          }}
+          transition={{
+            duration: 2,
+            ease: "easeOut",
+            delay: i * 0.05
+          }}
+        >
+          <div className={`w-3 h-3 rounded-full ${
+            i % 3 === 0 ? 'bg-[#FF6B00]' : 
+            i % 3 === 1 ? 'bg-[#FF8A3D]' : 
+            'bg-[#0066CC]'
+          }`} />
+        </motion.div>
+      ))}
+    </div>
+  )
 }
 
 export default function ProductForm() {
@@ -24,7 +61,7 @@ export default function ProductForm() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [quantity, setQuantity] = useState("1")
-  const [showSuccess, setShowSuccess] = useState(false)
+  const [showAnimation, setShowAnimation] = useState(false)
 
   useEffect(() => {
     const checkEbayStatus = async () => {
@@ -55,19 +92,19 @@ export default function ProductForm() {
 
   const handleSuccess = () => {
     setSuccess(true)
-    setShowSuccess(true)
+    setShowAnimation(true)
     setUrls('')
     
     setTimeout(() => {
-      setShowSuccess(false)
-    }, 3000)
+      setShowAnimation(false)
+    }, 4000)
   }
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setError('')
     setSuccess(false)
-    setShowSuccess(false)
+    setShowAnimation(false)
     
     if (!isEbayConnected) {
       setError('Devi prima connetterti a eBay')
@@ -133,43 +170,41 @@ export default function ProductForm() {
   return (
     <form className="space-y-6 relative">
       <AnimatePresence>
-        {showSuccess && (
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center z-50"
-          >
-            <motion.div
-              className="w-20 h-20 bg-gradient-to-r from-[#FF6B00] to-[#FF8A3D] rounded-full flex items-center justify-center"
-              initial={{ scale: 0 }}
-              animate={{
-                scale: [1, 1.2, 1],
-                boxShadow: [
-                  "0 0 0 0px rgba(255, 107, 0, 0.2)",
-                  "0 0 0 40px rgba(255, 107, 0, 0)",
-                ]
+        {showAnimation && (
+          <>
+            <ReactConfetti
+              width={window.innerWidth}
+              height={window.innerHeight}
+              colors={['#FF6B00', '#FF8A3D', '#0066CC', '#ffffff']}
+              numberOfPieces={200}
+              gravity={0.3}
+              initialVelocityY={20}
+              recycle={false}
+              onConfettiComplete={() => {
+                setShowAnimation(false)
               }}
-              transition={{ duration: 0.8 }}
+            />
+            <ParticleEffect />
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              className="absolute inset-0 flex items-center justify-center z-50"
             >
-              <motion.svg
-                className="w-10 h-10 text-white"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
+              <motion.div
+                className="text-4xl font-bold text-[#FF6B00] text-center"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ 
+                  y: 0,
+                  opacity: 1,
+                  scale: [1, 1.2, 1]
+                }}
+                transition={{ duration: 0.5 }}
               >
-                <motion.path
-                  d="M20 6L9 17l-5-5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </motion.svg>
+                Pubblicazione Completata! 🎉
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
       <AnimatePresence>
@@ -187,7 +222,7 @@ export default function ProductForm() {
           </motion.div>
         )}
         
-        {success && !showSuccess && (
+        {success && !showAnimation && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
