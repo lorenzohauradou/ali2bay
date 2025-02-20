@@ -295,7 +295,7 @@ export default function ProductForm() {
         />
       </div>
 
-      <div className="flex justify-center md:scale-110">
+      <div className="flex justify-center md:scale-125 py-6">
         <Button 
           icon={Rocket}
           onClick={handleSubmit}

@@ -6,10 +6,10 @@ import { Box } from "lucide-react"
 
 export default function FromTo() {
   return (
-    <section className="py-16">
+    <section className="py-0">
       <div className="container mx-auto px-4">
 
-        
+
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto relative">
           {/* SVG per le linee di collegamento */}
           <svg className="absolute top-0 right-12 w-full h-full -z-10" viewBox="0 0 1200 500">
