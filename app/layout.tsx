@@ -12,6 +12,9 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Ali2Bay - Automatizza il Dropshipping da Amazon e AliExpress su eBay",
   description: "Vuoi fare dropshipping su eBay senza perdere tempo? Ali2Bay pubblica automaticamente prodotti da Amazon e AliExpress in pochi secondi. Provalo gratis!",
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     title: "Ali2Bay - Dropshipping su eBay in 1 Click",
     description: "Ali2Bay è il tool definitivo per il dropshipping su eBay. Pubblica prodotti da Amazon e AliExpress automaticamente e inizia a guadagnare!",
@@ -19,9 +22,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.ali2bay.com/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "https://www.ali2bay.com/favicon.ico",
+        width: 32,
+        height: 32,
         alt: "Ali2Bay - Il miglior tool per dropshipping su eBay"
       }
     ]
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
     description: "Ali2Bay pubblica automaticamente prodotti da Amazon e AliExpress su eBay. Provalo gratis e inizia a vendere oggi stesso!",
     images: [
       {
-        url: "https://www.ali2bay.com/twitter-image.jpg",
+        url: "https://www.ali2bay.com/favicon.ico",
         alt: "Ali2Bay - Dropshipping veloce e automatico"
       }
     ]
@@ -47,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="it" className={geist.variable}>
       <head>
-      <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Ali2Bay Team" />
