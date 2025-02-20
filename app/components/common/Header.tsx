@@ -56,7 +56,10 @@ export default function Header() {
       }
       
       const data = await response.json();
-      console.log("URL di autorizzazione:", data.auth_url);
+      console.log("Risposta collega-ebay:", data);
+      
+      // Salva lo state localmente come backup
+      localStorage.setItem('ebay_state', data.state);
       
       // Reindirizza il browser all'URL di autorizzazione eBay
       window.location.href = data.auth_url;
