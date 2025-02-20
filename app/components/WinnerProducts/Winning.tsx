@@ -4,6 +4,7 @@ import { useState } from "react"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import ProTip from "@/app/components/ui/ProTip"
 
 type Category = {
   id: string
@@ -70,6 +71,9 @@ export default function Winning() {
           <h2 className="text-4xl font-bold tracking-tight text-[#0066CC]">
             Prodotti Vincenti
           </h2>
+          <ProTip>
+            Questa funzionalità è ancora in fase di sviluppo. Contattaci per ricevere l&apos;accesso anticipato.
+          </ProTip>
           <p className="text-xl text-gray-600">
             Diventa un <span className="font-semibold text-gray-600">Cecchino</span> del <span className="font-semibold text-gray-600">Dropshipping:</span> trova e vendi solo i <span className="font-semibold text-gray-600">prodotti più acquistati</span> e conquista eBay <span className="font-semibold text-gray-600">prima della concorrenza!</span>
           </p>
