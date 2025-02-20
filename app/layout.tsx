@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Ali2Bay - Automatizza il Dropshipping da Amazon e AliExpress su eBay",
   description: "Vuoi fare dropshipping su eBay senza perdere tempo? Ali2Bay pubblica automaticamente prodotti da Amazon e AliExpress in pochi secondi. Provalo gratis!",
   openGraph: {
-    title: "Ali2Bay - Dropshipping su eBay in 1 Clic",
+    title: "Ali2Bay - Dropshipping su eBay in 1 Click",
     description: "Ali2Bay è il tool definitivo per il dropshipping su eBay. Pubblica prodotti da Amazon e AliExpress automaticamente e inizia a guadagnare!",
     url: "https://www.ali2bay.com",
     type: "website",
