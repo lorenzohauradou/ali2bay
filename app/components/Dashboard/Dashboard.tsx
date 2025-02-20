@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import ProductForm from "./ProductForm"
 import Features from "../ui/Features"
+import FromTo from "../ui/FromTo"
 
 export default function Dashboard() {
   const containerVariants = {
@@ -44,6 +45,7 @@ export default function Dashboard() {
 
         <ProductForm />
         <Features />
+        <FromTo />
       </motion.div>
     </main>
   )

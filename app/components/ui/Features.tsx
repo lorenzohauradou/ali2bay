@@ -34,8 +34,13 @@ export default function Features() {
     ]
   
     return (
-      <section className="py-16">
+      <section className="py-8">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-4xl font-bold text-[#0066CC]">
+              Risparmia tempo evitando listing manuali
+            </h2>
+          </div>
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               {features.map((feature, index) => (
