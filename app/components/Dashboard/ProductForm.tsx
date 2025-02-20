@@ -125,7 +125,8 @@ export default function ProductForm() {
           urls: urls.split('\n').map(url => url.trim()).filter(Boolean),
           price_settings: {
             multiplier: parseFloat(multiplier.toString()),
-            rounding: priceRounding
+            round_to: priceRounding,
+            quantity: parseInt(quantity)
           }
         })
       })
