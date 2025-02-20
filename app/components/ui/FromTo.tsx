@@ -13,35 +13,43 @@ export default function FromTo() {
             Fai dropshipping su eBay in un solo click
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Il nostro obiettivo è semplificare il processo di vendita su eBay riducendo 
-            al minimo le operazioni necessarie per l&apos;utente.
+          <span className="font-bold text-gray-600">Dimentica</span> le <span className="font-bold text-gray-600">ore spese</span> a <span className="font-bold text-gray-600">scrivere descrizioni</span> e <span className="font-bold text-gray-600">ottimizzare immagini:</span> con <span className="font-bold text-gray-600">Ali2Bay</span> tutto è <span className="font-bold text-gray-600">automatico</span> così puoi dedicarti a far crescere il tuo <span className="font-bold text-gray-600">business</span> senza stress.
           </p>
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto relative">
-          {/* Frecce di flusso */}
-          <svg className="absolute top-0 left-0 w-full h-full -z-10" viewBox="0 0 1200 500">
-            {/* Freccia da Amazon al logo */}
+          {/* SVG per le linee di collegamento */}
+          <svg className="absolute top-0 right-12 w-full h-full -z-10" viewBox="0 0 1200 500">
+            {/* Linea dal cerchio superiore al logo */}
             <path
-              d="M 380,150 Q 480,150 580,250"
+              d="M 480,180 Q 550,180 620,250"
               stroke="#0066CC"
               strokeWidth="2"
               fill="none"
               markerEnd="url(#arrowhead)"
               className="opacity-20"
             />
-            {/* Freccia da AliExpress al logo */}
+            {/* Linea dal cerchio in basso a sinistra al logo */}
             <path
-              d="M 380,350 Q 480,350 580,250"
+              d="M 480,320 Q 550,320 620,250"
               stroke="#0066CC"
               strokeWidth="2"
               fill="none"
               markerEnd="url(#arrowhead)"
               className="opacity-20"
             />
-            {/* Frecce dal logo ai box eBay */}
+            {/* Linea dal cerchio in basso a destra al logo */}
             <path
-              d="M 680,250 Q 780,250 880,150"
+              d="M 480,320 Q 550,320 620,250"
+              stroke="#0066CC"
+              strokeWidth="2"
+              fill="none"
+              markerEnd="url(#arrowhead)"
+              className="opacity-20"
+            />
+            {/* Linee dal logo ai box eBay */}
+            <path
+              d="M 680,250 Q 750,250 820,150"
               stroke="#0066CC"
               strokeWidth="2"
               fill="none"
@@ -49,7 +57,15 @@ export default function FromTo() {
               className="opacity-20"
             />
             <path
-              d="M 680,250 Q 780,250 880,350"
+              d="M 680,250 Q 750,250 820,250"
+              stroke="#0066CC"
+              strokeWidth="2"
+              fill="none"
+              markerEnd="url(#arrowhead)"
+              className="opacity-20"
+            />
+            <path
+              d="M 680,250 Q 750,250 820,350"
               stroke="#0066CC"
               strokeWidth="2"
               fill="none"
@@ -76,33 +92,53 @@ export default function FromTo() {
             </defs>
           </svg>
 
-          {/* Screenshots a sinistra */}
-          <div className="w-full max-w-md space-y-4">
+          {/* Cerchi con foto prodotto a sinistra */}
+          <div className="w-full max-w-md grid grid-cols-2 gap-8 relative py-8">
+            {/* Primo cerchio in alto */}
             <motion.div
-              className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
+              className="col-span-2 justify-self-center w-48 h-48 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow border-4 border-white bg-white flex items-center justify-center"
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05 }}
             >
               <Image
-                src="/images/amazon-screenshot.png"
-                alt="Amazon product page"
-                width={600}
-                height={400}
-                className="w-full h-auto"
+                src="/images/product2.jpg"
+                alt="Product 1"
+                width={192}
+                height={192}
+                className="w-[90%] h-[90%] object-contain"
               />
             </motion.div>
+            {/* Secondo cerchio in basso a sinistra */}
             <motion.div
-              className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="w-40 h-40 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow border-4 border-white bg-white ml-8 flex items-center justify-center"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
+              whileHover={{ scale: 1.05 }}
             >
               <Image
-                src="/images/aliexpress-screenshot.png"
-                alt="AliExpress product page"
-                width={600}
-                height={400}
-                className="w-full h-auto"
+                src="/images/product1.jpg"
+                alt="Product 2"
+                width={160}
+                height={160}
+                className="w-[90%] h-[90%] object-contain"
+              />
+            </motion.div>
+            {/* Terzo cerchio in basso a destra */}
+            <motion.div
+              className="w-40 h-40 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow border-4 border-white bg-white mr-8 flex items-center justify-center"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <Image
+                src="/images/product3.jpg"
+                alt="Product 3"
+                width={160}
+                height={160}
+                className="w-[90%] h-[90%] object-contain"
               />
             </motion.div>
           </div>
@@ -115,7 +151,7 @@ export default function FromTo() {
           >
             <div className="relative">
               <Box className="h-16 w-16 md:h-24 md:w-24 text-[#0066CC]" />
-              <div className="absolute -top-1 -right-1 h-3 w-3 md:h-6 md:w-6 bg-[#FF6B00] rounded-full" />
+              <div className="absolute -top-1 -right-1 h-3 w-3 md:h-4 md:w-4 bg-[#FF6B00] rounded-full" />
             </div>
           </motion.div>
 
