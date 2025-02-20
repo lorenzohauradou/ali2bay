@@ -172,38 +172,40 @@ export default function ProductForm() {
       <AnimatePresence>
         {showAnimation && (
           <>
-            <ReactConfetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-              colors={['#FF6B00', '#FF8A3D', '#0066CC', '#ffffff']}
-              numberOfPieces={200}
-              gravity={0.3}
-              initialVelocityY={20}
-              recycle={false}
-              onConfettiComplete={() => {
-                setShowAnimation(false)
-              }}
-            />
-            <ParticleEffect />
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              className="absolute inset-0 flex items-center justify-center z-50"
-            >
-              <motion.div
-                className="text-4xl font-bold text-[#FF6B00] text-center"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ 
-                  y: 0,
-                  opacity: 1,
-                  scale: [1, 1.2, 1]
+            <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+              <ReactConfetti
+                width={window.innerWidth}
+                height={window.innerHeight}
+                colors={['#FF6B00', '#FF8A3D', '#0066CC', '#ffffff']}
+                numberOfPieces={300}
+                gravity={0.3}
+                initialVelocityY={30}
+                recycle={false}
+                onConfettiComplete={() => {
+                  setShowAnimation(false)
                 }}
-                transition={{ duration: 0.5 }}
+              />
+              <ParticleEffect />
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                className="absolute z-50 text-center"
               >
-                Pubblicazione Completata! 🎉
+                <motion.div
+                  className="text-5xl font-bold text-[#FF6B00] drop-shadow-lg"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ 
+                    y: 0,
+                    opacity: 1,
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Pubblicazione Completata! 🎉
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
