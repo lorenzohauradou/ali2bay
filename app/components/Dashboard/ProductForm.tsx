@@ -280,9 +280,38 @@ export default function ProductForm() {
           icon={Rocket}
           onClick={handleSubmit}
           disabled={loading}
-          className="bg-gradient-to-r from-[#FF6B00] to-[#FF8A3D] hover:from-[#FF8A3D] hover:to-[#FF6B00] transition-all duration-300"
+          className={`
+            relative overflow-hidden
+            bg-gradient-to-r from-[#FF6B00] to-[#FF8A3D]
+            ${loading ? 'animate-gradient' : 'hover:from-[#FF8A3D] hover:to-[#FF6B00]'}
+            transition-all duration-300
+          `}
         >
-          {loading ? 'Pubblicazione in corso...' : 'Pubblica su eBay'}
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute inset-0 bg-white/10"
+                    initial={{ x: '-100%' }}
+                    animate={{
+                      x: '100%',
+                    }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      delay: i * 0.2,
+                      ease: "linear"
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          <span className="relative z-10">
+            {loading ? 'Pubblicazione in corso...' : 'Pubblica su eBay'}
+          </span>
         </Button>
       </div>
     </form>
