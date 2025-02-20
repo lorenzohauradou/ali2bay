@@ -62,6 +62,7 @@ export default function ProductForm() {
   const [success, setSuccess] = useState(false)
   const [quantity, setQuantity] = useState("1")
   const [showAnimation, setShowAnimation] = useState(false)
+  const [isBlue, setIsBlue] = useState(true)
 
   useEffect(() => {
     const checkEbayStatus = async () => {
@@ -153,12 +154,30 @@ export default function ProductForm() {
     e.preventDefault()
     
     const pastedText = e.clipboardData.getData('text')
-    const cursorPosition = e.currentTarget.selectionStart || 0
-    const textBeforeCursor = urls.substring(0, cursorPosition)
-    const textAfterCursor = urls.substring(cursorPosition)
     
-    const newValue = textBeforeCursor + pastedText + '\n\n' + textAfterCursor
-    setUrls(newValue)
+    // Validazione per Amazon e AliExpress
+    const isAmazonLink = pastedText.includes('amazon.')
+    const isAliExpressLink = pastedText.includes('aliexpress.')
+    
+    if (!isAmazonLink && !isAliExpressLink) {
+      setError('Puoi incollare solo link di Amazon o AliExpress')
+      return
+    }
+    
+    const newText = pastedText + '\n\n'
+    const color = isBlue ? '#0066CC' : '#FF6B00'
+    
+    if (textareaRef.current) {
+      const existingText = textareaRef.current.value
+      const updatedText = existingText + newText
+      setUrls(updatedText)
+      
+      textareaRef.current.style.color = color
+    }
+
+    // alterna colore per il prossimo paste
+    setIsBlue(!isBlue)
+    setError('')
 
     setTimeout(() => {
       if (textareaRef.current) {
