@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Rocket } from "lucide-react"
+import { Rocket, CheckCircle, AlertCircle } from "lucide-react"
 import Button from "../ui/Button"
 import PriceManipulator from "@/app/components/Dashboard/PriceManipulator"
 import ProTip from "../ui/ProTip"
 import { fetchApi } from "@/config/api"
+import { motion, AnimatePresence } from 'framer-motion'
 
 type ApiResponse = {
   success: boolean;
@@ -23,6 +24,8 @@ export default function ProductForm() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [quantity, setQuantity] = useState("1")
+  const [showSuccess, setShowSuccess] = useState(false)
+
   useEffect(() => {
     const checkEbayStatus = async () => {
       try {
@@ -50,10 +53,21 @@ export default function ProductForm() {
     checkEbayStatus()
   }, [])
 
+  const handleSuccess = () => {
+    setSuccess(true)
+    setShowSuccess(true)
+    setUrls('')
+    
+    setTimeout(() => {
+      setShowSuccess(false)
+    }, 3000)
+  }
+
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setError('')
     setSuccess(false)
+    setShowSuccess(false)
     
     if (!isEbayConnected) {
       setError('Devi prima connetterti a eBay')
@@ -79,8 +93,7 @@ export default function ProductForm() {
       })
 
       if (response.success) {
-        setSuccess(true)
-        setUrls('')
+        handleSuccess()
         if (response.errors && response.errors.length > 0) {
           setError(`Alcuni prodotti non sono stati pubblicati: ${response.errors.map(err => err.error).join(', ')}`)
         }
@@ -118,17 +131,77 @@ export default function ProductForm() {
   }
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); }} className="space-y-6">
-      {error && (
-        <div className="bg-red-50 p-4 rounded-lg text-red-600 mb-4">
-          {error}
-        </div>
-      )}
-      {success && (
-        <div className="bg-green-50 p-4 rounded-lg text-green-600 mb-4">
-          Prodotti pubblicati con successo!
-        </div>
-      )}
+    <form className="space-y-6 relative">
+      <AnimatePresence>
+        {showSuccess && (
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            className="absolute inset-0 flex items-center justify-center z-50"
+          >
+            <motion.div
+              className="w-20 h-20 bg-gradient-to-r from-[#FF6B00] to-[#FF8A3D] rounded-full flex items-center justify-center"
+              initial={{ scale: 0 }}
+              animate={{
+                scale: [1, 1.2, 1],
+                boxShadow: [
+                  "0 0 0 0px rgba(255, 107, 0, 0.2)",
+                  "0 0 0 40px rgba(255, 107, 0, 0)",
+                ]
+              }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.svg
+                className="w-10 h-10 text-white"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+              >
+                <motion.path
+                  d="M20 6L9 17l-5-5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </motion.svg>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="flex items-center gap-3 p-4 rounded-lg border border-red-100 bg-gradient-to-r from-red-50 to-red-50/50"
+          >
+            <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+            <p className="text-red-600 font-medium text-sm">
+              {error}
+            </p>
+          </motion.div>
+        )}
+        
+        {success && !showSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="flex items-center gap-3 p-4 rounded-lg border border-[#FF6B00]/10 
+              bg-gradient-to-r from-[#FF6B00]/10 to-[#FF8A3D]/10"
+          >
+            <CheckCircle className="w-5 h-5 text-[#FF6B00] flex-shrink-0" />
+            <p className="text-[#FF6B00] font-medium text-sm">
+              Ottimo! I tuoi prodotti sono stati pubblicati con successo su eBay 🚀
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
         <div className="space-y-4">
           <label className="text-lg text-gray-600 font-semibold">
