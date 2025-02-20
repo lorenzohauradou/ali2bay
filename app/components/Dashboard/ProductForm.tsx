@@ -60,7 +60,7 @@ export default function ProductForm() {
   const [isEbayConnected, setIsEbayConnected] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
-  const [quantity, setQuantity] = useState("1")
+  const [quantity, setQuantity] = useState("10")
   const [showAnimation, setShowAnimation] = useState(false)
   const [isBlue, setIsBlue] = useState(true)
 

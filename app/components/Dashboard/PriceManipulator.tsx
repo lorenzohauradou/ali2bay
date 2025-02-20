@@ -1,5 +1,6 @@
 'use client'
 
+
 interface PriceManipulatorProps {
   priceRounding: string
   setPriceRounding: (value: string) => void
@@ -17,6 +18,7 @@ export default function PriceManipulator({
   quantity,
   setQuantity
 }: PriceManipulatorProps) {
+
 
   const desktopValues = [2, 2.25, 2.5, 2.75, 3, 3.25, 3.5, 3.75, 4]
   const mobileValues = [2, 2.5, 3, 3.5, 4]
@@ -112,7 +114,7 @@ export default function PriceManipulator({
                 focus:ring-[#FF6B00]/20
                 focus:border-[#FF6B00]
                 transition-colors"
-              placeholder="1"
+              placeholder="10"
             />
           </div>
         </div>
