@@ -279,7 +279,7 @@ export default function ProductForm() {
             }}
           />
           <ProTip>
-            Pro tip: Aggiungi molteplici URL - il sistema si occuperà di disporli uno per riga
+            Pro tip: Incolla molteplici URL, uno alla volta - il sistema si occuperà di disporli uno per riga
           </ProTip>
         </div>
       </div>
