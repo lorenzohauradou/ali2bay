@@ -104,7 +104,7 @@ export default function FromTo() {
             </motion.div>
             {/* Secondo cerchio in basso a sinistra */}
             <motion.div
-              className="w-40 h-40 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow border-4 border-white bg-white ml-8 flex items-center justify-center"
+              className="w-40 h-40 rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow border-4 border-white bg-white -mt-4 -ml-4 flex items-center justify-center"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
