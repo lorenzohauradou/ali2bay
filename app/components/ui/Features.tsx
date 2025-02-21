@@ -41,7 +41,7 @@ export default function Features() {
             Fai dropshipping su eBay in un solo click
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          <span className="font-bold text-gray-600">Dimentica</span> le <span className="font-bold text-gray-600">ore spese</span> a <span className="font-bold text-gray-600">scrivere descrizioni</span> e <span className="font-bold text-gray-600">ottimizzare immagini:</span> con <span className="font-bold text-gray-600">Ali2Bay</span> tutto è <span className="font-bold text-gray-600">automatico</span> così puoi dedicarti a far crescere il tuo <span className="font-bold text-gray-600">business</span> senza stress.
+          <span className="font-bold text-gray-600">Dimentica</span> le <span className="font-bold text-gray-600">ore spese</span> a <span className="font-bold text-gray-600">scrivere descrizioni</span> e a <span className="font-bold text-gray-600">pubblicare annunci manualmente:</span> con <span className="font-bold text-gray-600">Ali2Bay</span> tutto è <span className="font-bold text-gray-600">automatico,</span> così puoi dedicarti a far <span className="font-bold text-gray-600">crecere</span> il tuo <span className="font-bold text-gray-600"> business</span> senza stress.
           </p>
         </div>
           <div className="max-w-4xl mx-auto">
