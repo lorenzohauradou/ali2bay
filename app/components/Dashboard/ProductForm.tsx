@@ -103,7 +103,6 @@ export default function ProductForm() {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    setError('')
     setSuccess(false)
     setShowAnimation(false)
     
@@ -113,7 +112,6 @@ export default function ProductForm() {
     }
 
     if (!urls.trim()) {
-      setError('Inserisci almeno un URL')
       return
     }
 
@@ -133,19 +131,11 @@ export default function ProductForm() {
 
       if (response.success) {
         handleSuccess()
-        if (response.errors && response.errors.length > 0) {
-          setError(`Alcuni prodotti non sono stati pubblicati: ${response.errors.map(err => err.error).join(', ')}`)
-        }
       } else {
-        setError(response.error || 'Errore durante la pubblicazione')
+        console.error(response.error || 'Errore durante la pubblicazione')
       }
     } catch (error) {
       console.error('Errore:', error)
-      if (error instanceof Error) {
-        setError(error.message)
-      } else {
-        setError('Errore di connessione')
-      }
     } finally {
       setLoading(false)
     }
@@ -230,20 +220,6 @@ export default function ProductForm() {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="flex items-center gap-3 p-4 rounded-lg border border-red-100 bg-gradient-to-r from-red-50 to-red-50/50"
-          >
-            <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-            <p className="text-red-600 font-medium text-sm">
-              {error}
-            </p>
-          </motion.div>
-        )}
-        
         {success && !showAnimation && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -254,11 +230,24 @@ export default function ProductForm() {
           >
             <CheckCircle className="w-5 h-5 text-[#FF6B00] flex-shrink-0" />
             <p className="text-[#FF6B00] font-medium text-sm">
-              Ottimo! I tuoi prodotti sono stati pubblicati con successo su eBay 🚀
+              Ottimo! I tuoi prodotti sono stati pubblicati con successo! eBay ti invierà una email di conferma 🚀
             </p>
           </motion.div>
         )}
       </AnimatePresence>
+      {error && error === 'Devi prima connetterti a eBay' && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="flex items-center gap-3 p-4 rounded-lg border border-red-100 bg-gradient-to-r from-red-50 to-red-50/50"
+        >
+          <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+          <p className="text-red-600 font-medium text-sm">
+            {error}
+          </p>
+        </motion.div>
+      )}
       <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
         <div className="space-y-4">
           <label className="text-lg text-gray-600 font-semibold">
