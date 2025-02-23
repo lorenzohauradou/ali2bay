@@ -258,7 +258,7 @@ export default function ProductForm() {
             value={urls}
             onChange={(e) => setUrls(e.target.value)}
             onPaste={handlePaste}
-            placeholder="Incolla gli URL delle pagine dei prodotti da pubblicare su eBay..."
+            placeholder="Incolla gli URL delle pagine dei prodotti da pubblicare su eBay, assicurati che contengano amazon.it oppure it.aliexpress.com..."
             className="w-full min-h-[200px] p-4 border border-gray-200 rounded-lg 
               text-gray-600 placeholder:text-gray-400
               focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20 focus:border-[#0066CC]
